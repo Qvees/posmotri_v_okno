@@ -88,7 +88,7 @@ ol {
 .search-form {
   display: flex;
   flex-grow: 1;
-  justify-content: space-between;
+  justify-content: start;
   align-items: end;
   gap: 30px;
 }
@@ -149,7 +149,7 @@ ol {
 /* Добавляем границу к лейблу только при фокусе на текстовом поле */
 
 .search-form__label:has(.search-form__textfield:focus-visible) {
-  border: 1px solid white;
+  outline: 1px solid white;
 }
 
 /* Граница между группами полей */
@@ -171,7 +171,7 @@ ol {
 .search-form__submit-button {
   width: 194px;
   height: 34px;
-  margin: 25px 0 0 0;
+  margin: 25px 0 0 15px;
   background-color: transparent;
   border: 1px solid white;
   color: #fff;
@@ -395,7 +395,7 @@ input[type='checkbox']:checked + .search-form__pseudo-checkbox {
 /* Состояние при фокусе с видимой обводкой*/
 
 .button:focus-visible {
-  border: 2px solid white;
+  outline: 1px solid white;
 }
 
 /* Добавляем общий стиль для активной карточки */
@@ -427,5 +427,5 @@ input[type='checkbox']:checked + .search-form__pseudo-checkbox {
 
 .content__card-link:focus-visible {
   outline: none;
-  border: 1px solid white;
+  outline: 1px solid white;
 }
