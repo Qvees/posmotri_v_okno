@@ -1,12 +1,18 @@
+/* Устанавливаем общий бокс-модель для всех элементов */
+
 *,
 *::before,
 *::after {
   box-sizing: border-box;
 }
 
+/* Задаем 100% высоту для HTML элемента */
+
 html {
   block-size: 100%;
 }
+
+/* Основные стили страницы */
 
 .page {
   inline-size: 1200px;
@@ -17,6 +23,8 @@ html {
   font-size: 18px;
   background-color: #1b1919;
 }
+
+/* Сброс отступов и отступов для стандартных элементов */
 
 h1,
 h2,
@@ -32,7 +40,395 @@ fieldset {
   padding: 0;
 }
 
+/* Убираем стандартные маркеры списка */
+
 ul,
 ol {
   list-style: none;
+}
+
+/* Основной контейнер для контента */
+
+.content {
+  display: grid;
+  grid-template-columns: 711px 399px;
+  column-gap: 30px;
+  margin: 133px 30px;
+  max-width: 1140px;
+  min-height: 534px;
+}
+
+/* Секция с результатами */
+
+.result {
+  margin-bottom: 55px;
+}
+
+/* Контейнер для видео */
+
+.result__video-container {
+  position: relative;
+  max-width: 100%;
+  margin-bottom: 3px;
+  margin-top: 75px;
+}
+
+/* Видео */
+
+.result__video {
+  width: 711px;
+  height: 386px;
+  object-fit: cover;
+}
+
+/* Форма поиска */
+
+.search-form {
+  display: flex;
+  flex-grow: 1;
+  justify-content: space-between;
+  align-items: end;
+}
+
+/* Стили для полей формы */
+
+.search-form__fieldset {
+  border: none;
+  font-family: 'Fira Sans Condensed', Arial;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+/* Стили для текстового поля ввода */
+
+.search-form__textfield {
+  background-color: transparent;
+  appearance: none;
+  border: none;
+  width: 225px;
+  color: white;
+  font-family: 'Fira Sans Condensed';
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+/* Общие стили для лейблов */
+
+.search-form__label {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+}
+
+/* Пространство между лейблами */
+
+.search-form__label:not(:last-child) {
+  margin-right: 10px;
+}
+
+/* Убираем обводку для текстового поля при фокусе */
+
+.search-form__textfield:focus {
+  outline: none;
+}
+
+/* Добавляем границу к лейблу только при фокусе на текстовом поле */
+
+.search-form__label:has(.search-form__textfield:focus-visible) {
+  border: 1px solid white;
+}
+
+/* Стили для заголовков групп полей */
+
+.search-form__fieldset-title {
+  color: #fff;
+  font-family: 'Fira Sans Condensed', Arial, Helvetica, sans-serif;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+}
+
+/* Граница между группами полей */
+
+.search-form__fieldset:first-of-type {
+  border-bottom: 1px solid white;
+  margin-top: 5px;
+  line-height: 0;
+}
+
+/* Дополнительный стиль для первого заголовка */
+
+.search-form__fieldset:first-child .search-form__fieldset-title {
+  border-bottom: 1px solid white;
+  line-height: 30px;
+}
+
+/* Стили для кнопки "Найти" */
+
+.search-form__submit-button {
+  width: 194px;
+  height: 34px;
+  margin-top: 22px;
+  background-color: transparent;
+  border: 1px solid white;
+  color: #fff;
+  text-align: center;
+  font-family: 'Fira Sans Condensed';
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+/* Скрываем элементы от пользователей, но сохраняем доступность для скринридеров */
+
+.visually-hidden {
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* Стили для псевдо-чекбокса */
+
+.search-form__pseudo-checkbox {
+  display: inline-block;
+  width: 19px;
+  height: 19px;
+  margin-right: 5px;
+  vertical-align: middle;
+  background-color: transparent;
+  border: 1px solid white;
+  cursor: pointer;
+}
+
+/* Стили для фокусировки псевдо-чекбокса */
+
+.search-form__checkbox:focus-visible + .search-form__pseudo-checkbox {
+  background-color: white;
+  box-shadow: inset 0 0 0 1px #1b1919;
+}
+
+/* Стили для выбранного чекбокса */
+
+input[type='checkbox']:checked + .search-form__pseudo-checkbox {
+  background-color: white;
+  box-shadow: inset 0 0 0 1px #1b1919;
+}
+
+/* Добавляем отступы и позиционирование для псевдоэлемента подчеркивания */
+
+.search-form__label-text {
+  position: relative;
+}
+
+/* Создание псевдоэлемента для подчеркивания */
+
+.search-form__label-text::before {
+  content: '';
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+  width: 100%;
+  border-bottom: 1px solid white;
+  opacity: 0;
+  transform: scaleX(0);
+  transition:
+    transform 0.3s ease,
+    opacity 0.3s ease;
+}
+
+/* Показываем подчеркивание при наведении */
+
+.search-form__label:hover .search-form__label-text::before {
+  opacity: 1;
+  transform: scaleX(1);
+}
+
+/* Стили для списка контента */
+
+.content__list {
+  position: relative;
+  max-height: 295px;
+  overflow: hidden;
+  overflow-y: initial;
+}
+
+/* Стили для скроллбара списка контента */
+
+.content__list::-webkit-scrollbar {
+  width: 0;
+}
+
+/* Отступ между элементами списка контента */
+
+.content__list-item:not(:last-child) {
+  margin-bottom: 15px;
+}
+
+/* Карточка видео контента */
+
+.content__video-card {
+  display: flex;
+  align-items: start;
+  min-width: 394px;
+  min-height: 107px;
+  margin-bottom: 30px;
+}
+
+/* Миниатюра видео карточки */
+
+.content__video-card-thumbnail {
+  width: 194px;
+  height: 103px;
+  object-fit: cover;
+  align-self: center;
+}
+
+/* Контейнер для описания видео карточки */
+
+.content__video-card-description-container {
+  flex-grow: 1;
+}
+
+/* Заголовок страницы */
+
+.title {
+  color: #fff;
+  font-family: Oswald;
+  font-size: 75px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 94%;
+  text-transform: uppercase;
+  margin-bottom: 22px;
+}
+
+/* Акцентный текст */
+
+.content__accent {
+  color: #545050;
+}
+
+/* Ссылка для карточки контента */
+
+.content__card-link {
+  display: block;
+  margin: 2px;
+  text-decoration: none;
+  transition: background-color 0.3s;
+}
+
+/* Заголовок видео карточки */
+
+.content__video-card-title {
+  color: #fff;
+  font-family: Oswald;
+  font-size: 30px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 30px; /* 30px */
+  text-transform: uppercase;
+}
+
+/* Описание видео карточки */
+
+.content__video-card-description {
+  color: #fff;
+  font-family: 'Fira Sans Condensed';
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 27px; /* 90% */
+}
+
+/* Кнопка "Показать еще" */
+
+.more-button {
+  width: 399px;
+  height: 34px;
+  background-color: transparent;
+  border: 1px solid white;
+  color: #fff;
+  text-align: center;
+  font-family: 'Fira Sans Condensed';
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  cursor: pointer;
+}
+
+.button {
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease,
+    border-color 0.3s ease;
+  cursor: pointer;
+}
+
+/* Состояние при фокусе */
+
+.button:focus {
+  outline: none;
+}
+/* Состояние при наведении */
+
+.button:hover {
+  background-color: #545050;
+  color: white;
+  border-color: white;
+}
+
+/* Состояние при активации */
+
+.button:active {
+  background-color: #545050;
+  color: #fff;
+  border-color: #fff;
+}
+
+/* Состояние при фокусе с видимой обводкой*/
+
+.button:focus-visible {
+  border: 2px solid white;
+}
+
+/* Добавляем общий стиль для активной карточки */
+
+.content__card-link_current {
+  display: block;
+  background-color: #545050;
+}
+
+/* Состояние при наведении */
+
+.content__card-link:hover {
+  text-decoration: underline;
+  text-underline-offset: 7px;
+  text-decoration-thickness: 1px;
+  color: white; 
+}
+
+/* Состояние при активации */
+
+.content__card-link:active {
+  border: none;
+  background-color: #545050;
+}
+
+.content__card-link:focus {
+  outline: none;
+}
+
+.content__card-link:focus-visible {
+  outline: none; 
+  border: 1px solid white; 
 }
