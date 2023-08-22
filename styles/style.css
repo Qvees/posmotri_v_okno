@@ -116,7 +116,7 @@ ol {
   line-height: normal;
 }
 
-/* Общие стили для лейблов */
+/* Общие стили для лейблов. */
 
 .search-form__label {
   display: inline-flex;
