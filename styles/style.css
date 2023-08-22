@@ -16,6 +16,7 @@ html {
 
 .page {
   inline-size: 1200px;
+  max-height: 800px;
   block-size: 100%;
   margin: auto;
   color: #fff;
@@ -187,7 +188,6 @@ ol {
 /* Скрываем элементы от пользователей, но сохраняем доступность для скринридеров */
 
 .visually-hidden {
-  position: absolute;
   inline-size: 1px;
   block-size: 1px;
   overflow: hidden;
@@ -231,25 +231,24 @@ input[type='checkbox']:checked + .search-form__pseudo-checkbox {
 
 /* Создание псевдоэлемента для подчеркивания */
 
+/* Показываем подчеркивание при наведении */
+
 .search-form__label-text::before {
   content: '';
-  position: absolute;
-  bottom: -3px;
-  left: 0;
+  display: block;
   width: 100%;
-  border-bottom: 1px solid white;
+  height: 1px;
+  background-color: white;
   opacity: 0;
-  transform: scaleX(0);
   transition:
     transform 0.3s ease,
     opacity 0.3s ease;
+  position: relative;
+  top: 25px;
 }
-
-/* Показываем подчеркивание при наведении */
 
 .search-form__label:hover .search-form__label-text::before {
   opacity: 1;
-  transform: scaleX(1);
 }
 
 /* Стили для списка контента */
@@ -414,7 +413,7 @@ input[type='checkbox']:checked + .search-form__pseudo-checkbox {
   text-decoration: underline;
   text-underline-offset: 7px;
   text-decoration-thickness: 1px;
-  color: white; 
+  color: white;
 }
 
 /* Состояние при активации */
@@ -429,6 +428,6 @@ input[type='checkbox']:checked + .search-form__pseudo-checkbox {
 }
 
 .content__card-link:focus-visible {
-  outline: none; 
-  border: 1px solid white; 
+  outline: none;
+  border: 1px solid white;
 }
