@@ -16,7 +16,6 @@ html {
 
 .page {
   inline-size: 1200px;
-  max-height: 800px;
   block-size: 100%;
   margin: auto;
   color: #fff;
@@ -63,7 +62,9 @@ ol {
 /* Секция с результатами */
 
 .result {
-  margin-bottom: 55px;
+  /* не понимаю как сделать более гибким расположение элементов. Сделал так.*/
+  display: grid;
+  grid-template-rows: repeat(2, auto);
 }
 
 /* Контейнер для видео */
@@ -71,8 +72,7 @@ ol {
 .result__video-container {
   position: relative;
   max-width: 100%;
-  margin-bottom: 3px;
-  margin-top: 133px;
+  margin-top: 75px; /*Возможно опять не так как надо*/
 }
 
 /* Видео */
@@ -87,9 +87,9 @@ ol {
 
 .search-form {
   display: flex;
+  justify-content: space-between;
+  align-items: center;
   flex-grow: 1;
-  justify-content: start;
-  align-items: end;
   gap: 30px;
 }
 
@@ -97,7 +97,7 @@ ol {
 
 .search-form__fieldset {
   border: none;
-  font-family: 'Fira Sans Condensed', Arial;
+  font-family: 'Fira Sans Condensed', Arial, sans-serif;
   font-size: 18px;
   font-style: normal;
   font-weight: 400;
@@ -117,53 +117,48 @@ ol {
   font-style: normal;
   font-weight: 400;
   line-height: normal;
+  border-bottom: 1px solid white;
+  border-top: 1px solid white;
 }
 
 /* Стили для заголовков групп полей */
 
 .search-form__fieldset-title {
   color: #fff;
-  font-family: 'Fira Sans Condensed', Arial, Helvetica, sans-serif;
+  font-family: 'Fira Sans Condensed', Arial, sans-serif;
   font-size: 18px;
   font-style: normal;
   font-weight: 400;
 }
 
-.search-form__fieldset:nth-child(2) .search-form__fieldset-title {
-  padding-left: 8px;
-}
 /* Общие стили для лейблов. */
 
 .search-form__label {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   width: fit-content;
+  cursor: pointer;
 }
 
-/* Убираем обводку для текстового поля при фокусе */
+.search-form__checkbox-list {
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  gap: 15px;
+}
+
+/*отключаем фокус у текстового поля*/
 
 .search-form__textfield:focus {
   outline: none;
 }
 
-/* Добавляем границу к лейблу только при фокусе на текстовом поле */
+/* делаем с клавиатуры фокус у текстового поля и лейблов чекбоксов*/
 
-.search-form__label:has(.search-form__textfield:focus-visible) {
+.search-form__label:has(.search-form__textfield:focus-visible),
+.search-form__label:has(.search-form__checkbox:focus-visible) {
   outline: 1px solid white;
-}
-
-/* Граница между группами полей */
-
-.search-form__fieldset:first-of-type {
-  border-bottom: 1px solid white;
-  line-height: 0;
-}
-
-/* Дополнительный стиль для первого заголовка */
-
-.search-form__fieldset:first-child .search-form__fieldset-title {
-  border-bottom: 1px solid white;
-  line-height: 30px;
 }
 
 /* Стили для кнопки "Найти" */
@@ -171,21 +166,13 @@ ol {
 .search-form__submit-button {
   width: 194px;
   height: 34px;
-  margin: 25px 0 0 15px;
-  background-color: transparent;
-  border: 1px solid white;
-  color: #fff;
-  text-align: center;
-  font-family: 'Fira Sans Condensed';
-  font-size: 18px;
-  font-style: normal;
-  font-weight: 700;
-  cursor: pointer;
+  margin: 30px 0 0 15px;
 }
 
 /* Скрываем элементы от пользователей, но сохраняем доступность для скринридеров */
 
 .visually-hidden {
+  position: absolute;
   inline-size: 1px;
   block-size: 1px;
   overflow: hidden;
@@ -197,7 +184,9 @@ ol {
 /* Стили для псевдо-чекбокса */
 
 .search-form__pseudo-checkbox {
-  display: inline-block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 19px;
   height: 19px;
   margin-right: 5px;
@@ -207,16 +196,9 @@ ol {
   cursor: pointer;
 }
 
-/* Стили для фокусировки псевдо-чекбокса */
-
-.search-form__checkbox:focus-visible + .search-form__pseudo-checkbox {
-  background-color: white;
-  box-shadow: inset 0 0 0 1px #1b1919;
-}
-
 /* Стили для выбранного чекбокса */
 
-input[type='checkbox']:checked + .search-form__pseudo-checkbox {
+.search-form__checkbox:checked + .search-form__pseudo-checkbox {
   background-color: white;
   box-shadow: inset 0 0 0 1px #1b1919;
 }
@@ -254,20 +236,20 @@ input[type='checkbox']:checked + .search-form__pseudo-checkbox {
 .content__list {
   position: relative;
   max-height: 295px;
-  overflow: hidden;
-  overflow-y: initial;
+  overflow-y: auto;
 }
 
 /* Стили для скроллбара списка контента */
 
 .content__list::-webkit-scrollbar {
+  /*в макете нет скролла. Почему его не нужно скрывать ? */
   width: 0;
 }
 
 /* Отступ между элементами списка контента */
 
 .content__list-item:not(:last-child) {
-  margin-bottom: 15px;
+  margin-bottom: 34px;
 }
 
 /* Карточка видео контента */
@@ -276,8 +258,6 @@ input[type='checkbox']:checked + .search-form__pseudo-checkbox {
   display: flex;
   align-items: start;
   min-width: 394px;
-  min-height: 107px;
-  margin-bottom: 30px;
 }
 
 /* Миниатюра видео карточки */
@@ -285,8 +265,7 @@ input[type='checkbox']:checked + .search-form__pseudo-checkbox {
 .content__video-card-thumbnail {
   width: 194px;
   height: 103px;
-  object-fit: cover;
-  align-self: center;
+  object-position: 50% 50%;
 }
 
 /* Контейнер для описания видео карточки */
@@ -299,7 +278,7 @@ input[type='checkbox']:checked + .search-form__pseudo-checkbox {
 
 .title {
   color: #fff;
-  font-family: Oswald;
+  font-family: Oswald, Arial, sans-serif;
   font-size: 75px;
   font-style: normal;
   font-weight: 700;
@@ -327,7 +306,7 @@ input[type='checkbox']:checked + .search-form__pseudo-checkbox {
 
 .content__video-card-title {
   color: #fff;
-  font-family: Oswald;
+  font-family: Oswald, Arial, sans-serif;
   font-size: 30px;
   font-style: normal;
   font-weight: 700;
@@ -339,11 +318,29 @@ input[type='checkbox']:checked + .search-form__pseudo-checkbox {
 
 .content__video-card-description {
   color: #fff;
-  font-family: 'Fira Sans Condensed';
+  font-family: 'Fira Sans Condensed', Arial, sans-serif;
   font-size: 18px;
   font-style: normal;
   font-weight: 400;
-  line-height: 27px; /* 90% */
+  line-height: 90%;
+}
+
+/*Общие стили кнопок*/
+
+.button {
+  background-color: transparent;
+  border: 1px solid currentColor;
+  color: #fff;
+  text-align: center;
+  font-family: 'Fira Sans Condensed', Arial, sans-serif;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  cursor: pointer;
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease,
+    border-color 0.3s ease;
 }
 
 /* Кнопка "Показать еще" */
@@ -351,24 +348,6 @@ input[type='checkbox']:checked + .search-form__pseudo-checkbox {
 .more-button {
   width: 399px;
   height: 34px;
-  background-color: transparent;
-  border: 1px solid white;
-  color: #fff;
-  text-align: center;
-  font-family: 'Fira Sans Condensed';
-  font-size: 18px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: normal;
-  cursor: pointer;
-}
-
-.button {
-  transition:
-    background-color 0.3s ease,
-    color 0.3s ease,
-    border-color 0.3s ease;
-  cursor: pointer;
 }
 
 /* Состояние при фокусе */
@@ -379,17 +358,14 @@ input[type='checkbox']:checked + .search-form__pseudo-checkbox {
 /* Состояние при наведении */
 
 .button:hover {
-  background-color: #545050;
-  color: white;
-  border-color: white;
+  text-decoration: underline;
 }
 
 /* Состояние при активации */
 
 .button:active {
+  text-decoration: none;
   background-color: #545050;
-  color: #fff;
-  border-color: #fff;
 }
 
 /* Состояние при фокусе с видимой обводкой*/
@@ -401,7 +377,6 @@ input[type='checkbox']:checked + .search-form__pseudo-checkbox {
 /* Добавляем общий стиль для активной карточки */
 
 .content__card-link_current {
-  display: block;
   background-color: #545050;
 }
 
@@ -409,15 +384,15 @@ input[type='checkbox']:checked + .search-form__pseudo-checkbox {
 
 .content__card-link:hover {
   text-decoration: underline;
-  text-underline-offset: 7px;
+  text-decoration-skip-ink: none;
+  text-underline-offset: 2px;
   text-decoration-thickness: 1px;
-  color: white;
+  color: white; /*если не указать подчеркивание будет синим цветом. Почему так не знаю*/
 }
 
 /* Состояние при активации */
 
 .content__card-link:active {
-  border: none;
   background-color: #545050;
 }
 
@@ -426,6 +401,5 @@ input[type='checkbox']:checked + .search-form__pseudo-checkbox {
 }
 
 .content__card-link:focus-visible {
-  outline: none;
   outline: 1px solid white;
 }
