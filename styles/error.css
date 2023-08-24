@@ -4,13 +4,19 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  max-height: 391px;
   background-color: #545050;
 }
 
 .error__title {
   color: #fff;
-  font-family: Oswald, sans-serif;
+  font-family: 'Fira Sans Condensed'; /*текст в макете явно не Oswald если оставлять освальд он становится гараздо жирней*/
   font-size: 30px;
   text-align: center;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 33px; /* 33px */
   text-transform: uppercase;
+  letter-spacing: -0.9px;
+  transform: scaleY(1.2);
 }
