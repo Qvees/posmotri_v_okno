@@ -1,4 +1,6 @@
 /* Устанавливаем общий бокс-модель для всех элементов */
+/*Поправил что вы сказил скролл не ушел. Горизонтальный Скролл появляется из за того что есть вертикальный 
+скролл если уменьшить размер кнопки и уменьшить размер карточек до 382px то горизонтальный скролл пропадает. Если просто убрать вертикальный скролл коризонатльый тоже пропадет*/
 
 *,
 *::before,
@@ -49,30 +51,26 @@ ol {
 
 /* Основной контейнер для контента */
 
-.content {                 
-  /*Правило grid-template-rows с жёсткими значениями нужно удалить, нет необходимости 
-  высчитывать высоту ячеек, само содержимое ячейки определяет текущую высоту. Исправил*/
+.content {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: auto 399px;
   margin: auto;
   max-width: 1140px;
   min-height: 100vh;
   align-content: center;
   align-items: end;
   column-gap: 30px;
-
-
 }
 
 /* Секция с результатами */
 
 .result {
+  /*Правило grid-template-rows с жёсткими значениями нужно удалить, нет необходимости 
+  высчитывать высоту ячеек, само содержимое ячейки определяет текущую высоту. Исправил*/
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr auto auto;
   justify-items: center;
   row-gap: 16px;
-
 }
 
 /* Контейнер для видео */
@@ -194,6 +192,8 @@ ol {
 
 /* Стили для псевдо-чекбокса */
 
+/*в группе сказали сделать через псевдоэлемент надо*/
+
 .search-form__pseudo-checkbox {
   display: flex;
   align-items: center;
@@ -205,14 +205,44 @@ ol {
   background-color: transparent;
   border: 1px solid white;
   cursor: pointer;
+  position: relative;
 }
+
+.search-form__pseudo-checkbox::before {
+  content: '';
+  display: block;
+  width: 13px;
+  height: 13px;
+  background-color: white;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.search-form__checkbox:checked + .search-form__pseudo-checkbox::before {
+  opacity: 1;
+}
+
+/*так было раньше*/
+
+/* .search-form__pseudo-checkbox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 19px;
+  height: 19px;
+  margin-right: 5px;
+  vertical-align: middle;
+  background-color: transparent;
+  border: 1px solid white;
+  cursor: pointer;
+} */
 
 /* Стили для выбранного чекбокса */
 
-.search-form__checkbox:checked + .search-form__pseudo-checkbox {
+/* .search-form__checkbox:checked + .search-form__pseudo-checkbox {
   background-color: white;
   box-shadow: inset 0 0 0 1px #1b1919;
-}
+} */
 
 /* Добавляем отступы и позиционирование для псевдоэлемента подчеркивания */
 
@@ -265,25 +295,24 @@ ol {
 .content__video-card {
   display: flex;
   min-height: 107px;
-  padding: 2px 0 0 2px;
+  padding: 2px 0 0 2px; /*добавил чтобы отодвинуть текс и изображение от контейнера, по макету они не в плотную стоят. На скролл не влияет*/
 }
 
 /* Стили для списка контента */
 
 .content__list {
-  /*после внесения всех исправлений в код, контейнер не должен прокручиваться по горизонтальной оси.Исправил по горизонтали не прокручивается. Горизонтальный  скролл не уходит. 
-  Проверил все вроде все размеры по макету.  */
+  /*после внесения всех исправлений в код, контейнер не должен прокручиваться по горизонтальной оси. Горизонтальный  скролл не уходит. 
+  Проверил все вроде все размеры по макету.  Я уже реально не понимаю в чем ошибка.*/
   position: relative;
-  min-width: 399px;
+  min-width: 399px; /*размер по макету*/
   max-height: 295px;
   min-height: 300px;
-  overflow-y: auto; 
+  overflow-y: auto; /*если горизонтальный скролл появляется из за вертикального тогда его можно просто скрыть overflow-x:hidden;*/
 }
 
 .content__list-item {
   /*Высоту блока не следует ограничивать, так как при добавлении/удалении контента отображение сломается.Исправил*/
-  width: 394px;
-
+  width: 394px; /*размер по макету*/
 }
 
 /* Отступ между элементами списка контента */
@@ -325,7 +354,6 @@ ol {
   text-decoration: none;
   transition: background-color 0.3s;
   margin: 2px;
-
 }
 
 /* Заголовок видео карточки */
@@ -373,7 +401,7 @@ ol {
 /* Кнопка "Показать еще" */
 
 .more-button {
-  width: 398px;
+  width: 399px; /*размер по макету*/
   height: 34px;
 }
 
