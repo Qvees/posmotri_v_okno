@@ -51,8 +51,7 @@ ol {
 
 .content {
   display: grid;
-  grid-template-columns: 711px 399px;
-  column-gap: 30px;
+  grid-template-columns: auto 399px;
   margin: auto;
   max-width: 1140px;
   min-height: 100vh;
@@ -62,17 +61,22 @@ ol {
 /* Секция с результатами */
 
 .result {
-  /* не понимаю как сделать более гибким расположение элементов. Сделал так.*/
   display: grid;
-  grid-template-rows: repeat(2, auto);
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 58px auto auto; 
+  justify-items: center; 
+  gap:15px
 }
 
 /* Контейнер для видео */
 
 .result__video-container {
   position: relative;
+  grid-row: 2; 
   max-width: 100%;
-  margin-top: 75px; /*Возможно опять не так как надо*/
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 /* Видео */
@@ -86,11 +90,12 @@ ol {
 /* Форма поиска */
 
 .search-form {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-grow: 1;
-  gap: 30px;
+display: flex;
+align-items: center;
+justify-content: space-between;
+min-width: 711px;
+gap: 30px;
+grid-row: 3; 
 }
 
 /* Стили для полей формы */
@@ -112,7 +117,7 @@ ol {
   border: none;
   width: 225px;
   color: white;
-  font-family: 'Fira Sans Condensed';
+  font-family: 'Fira Sans Condensed', Arial, sans-serif;
   font-size: 18px;
   font-style: normal;
   font-weight: 400;
@@ -134,11 +139,12 @@ ol {
 /* Общие стили для лейблов. */
 
 .search-form__label {
-  display: inline-flex;
-  align-items: center;
+  display: flex;
+  align-items: start;
   justify-content: center;
   width: fit-content;
   cursor: pointer;
+  margin-top: 5px;
 }
 
 .search-form__checkbox-list {
@@ -166,7 +172,7 @@ ol {
 .search-form__submit-button {
   width: 194px;
   height: 34px;
-  margin: 30px 0 0 15px;
+  margin: 20px 0 0 0;
 }
 
 /* Скрываем элементы от пользователей, но сохраняем доступность для скринридеров */
@@ -231,41 +237,71 @@ ol {
   opacity: 1;
 }
 
-/* Стили для списка контента */
-
-.content__list {
-  position: relative;
-  max-height: 295px;
-  overflow-y: auto;
+.content__details{
+  display: grid;
+  align-items: start;
+  justify-content: center;
+  gap: 26px;
 }
 
-/* Стили для скроллбара списка контента */
 
-.content__list::-webkit-scrollbar {
-  /*в макете нет скролла. Почему его не нужно скрывать ? */
-  width: 0;
+.title { 
+  color: #fff;
+  font-family: Oswald, Arial, sans-serif;
+  font-size: 75px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 94%;
+  text-transform: uppercase;
+
 }
 
-/* Отступ между элементами списка контента */
-
-.content__list-item:not(:last-child) {
-  margin-bottom: 34px;
-}
 
 /* Карточка видео контента */
 
 .content__video-card {
   display: flex;
-  align-items: start;
-  min-width: 394px;
+  min-height: 107px;
 }
+
+/* Стили для списка контента */
+
+.content__list {
+  position: relative;
+  min-width: 394px;
+  max-height: 295px;
+  overflow: auto;
+  scrollbar-width: none; /* Для Firefox */
+  -ms-overflow-style: none; /* Для IE и Edge */
+}
+
+.content__list-item{
+  width: 394px;
+  min-height: 107px;
+}
+
+/* Стили для скроллбара списка контента */
+
+.content__list::-webkit-scrollbar {
+  display: none; /* Для Chrome, Safari и Opera */
+}
+
+/* Отступ между элементами списка контента */
+
+.content__list-item:not(:last-child) {
+  margin-bottom: 30px;
+}
+
+
 
 /* Миниатюра видео карточки */
 
 .content__video-card-thumbnail {
   width: 194px;
   height: 103px;
-  object-position: 50% 50%;
+  object-fit:cover ;
+  object-position:bottom ;
+
 }
 
 /* Контейнер для описания видео карточки */
@@ -276,16 +312,6 @@ ol {
 
 /* Заголовок страницы */
 
-.title {
-  color: #fff;
-  font-family: Oswald, Arial, sans-serif;
-  font-size: 75px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 94%;
-  text-transform: uppercase;
-  margin-bottom: 22px;
-}
 
 /* Акцентный текст */
 
@@ -293,11 +319,12 @@ ol {
   color: #545050;
 }
 
+
 /* Ссылка для карточки контента */
 
 .content__card-link {
   display: block;
-  margin: 2px;
+  padding-top: 2px;
   text-decoration: none;
   transition: background-color 0.3s;
 }
@@ -312,6 +339,7 @@ ol {
   font-weight: 700;
   line-height: 30px; /* 30px */
   text-transform: uppercase;
+  padding-left: 3px;
 }
 
 /* Описание видео карточки */
@@ -323,6 +351,7 @@ ol {
   font-style: normal;
   font-weight: 400;
   line-height: 90%;
+  padding-left: 3px;
 }
 
 /*Общие стили кнопок*/
@@ -364,7 +393,6 @@ ol {
 /* Состояние при активации */
 
 .button:active {
-  text-decoration: none;
   background-color: #545050;
 }
 
@@ -377,6 +405,7 @@ ol {
 /* Добавляем общий стиль для активной карточки */
 
 .content__card-link_current {
+  height: 107px;
   background-color: #545050;
 }
 
