@@ -49,13 +49,19 @@ ol {
 
 /* Основной контейнер для контента */
 
-.content {
+.content {                 
+  /*Правило grid-template-rows с жёсткими значениями нужно удалить, нет необходимости 
+  высчитывать высоту ячеек, само содержимое ячейки определяет текущую высоту. Исправил*/
   display: grid;
-  grid-template-columns: auto 399px;
+  grid-template-columns: 1fr 1fr;
   margin: auto;
   max-width: 1140px;
   min-height: 100vh;
-  place-items: center;
+  align-content: center;
+  align-items: end;
+  column-gap: 30px;
+
+
 }
 
 /* Секция с результатами */
@@ -63,9 +69,10 @@ ol {
 .result {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: 62px auto auto;
+  grid-template-rows: 1fr auto auto;
   justify-items: center;
-  gap: 14px;
+  row-gap: 16px;
+
 }
 
 /* Контейнер для видео */
@@ -87,10 +94,11 @@ ol {
 /* Форма поиска */
 
 .search-form {
+  /*Не следует ограничивать ширину так как количество элементов может изменяться, ширина данного блока должна занимать 100% Исправил*/
   display: flex;
   align-items: center;
   justify-content: space-between;
-  min-width: 711px;
+  width: 100%;
   gap: 30px;
   grid-row: 3;
 }
@@ -137,7 +145,7 @@ ol {
 
 .search-form__label {
   display: flex;
-  align-items: start;
+  align-items: center;
   justify-content: center;
   width: fit-content;
   cursor: pointer;
@@ -257,30 +265,25 @@ ol {
 .content__video-card {
   display: flex;
   min-height: 107px;
+  padding: 2px 0 0 2px;
 }
 
 /* Стили для списка контента */
 
 .content__list {
-  /*скрыл скрол барт так как в макете его нет, но прокрутить до кнопки как то надо. Возможно я не доконца понимаю суть замечания.*/
+  /*после внесения всех исправлений в код, контейнер не должен прокручиваться по горизонтальной оси.Исправил по горизонтали не прокручивается. Горизонтальный  скролл не уходит. 
+  Проверил все вроде все размеры по макету.  */
   position: relative;
   min-width: 399px;
   max-height: 295px;
   min-height: 300px;
-  overflow: auto;
-  scrollbar-width: none; /* Для Firefox */
-  -ms-overflow-style: none; /* Для IE и Edge */
+  overflow-y: auto; 
 }
 
 .content__list-item {
+  /*Высоту блока не следует ограничивать, так как при добавлении/удалении контента отображение сломается.Исправил*/
   width: 394px;
-  min-height: 107px;
-}
 
-/* Стили для скроллбара списка контента */
-
-.content__list::-webkit-scrollbar {
-  display: none; /* Для Chrome, Safari и Opera */
 }
 
 /* Отступ между элементами списка контента */
@@ -292,18 +295,18 @@ ol {
 /* Миниатюра видео карточки */
 
 .content__video-card-thumbnail {
+  /*в отступе не будет необходимости. Убрал отступ*/
   width: 194px;
   height: 103px;
   object-fit: cover;
   object-position: center;
-  padding-top: 2px;
 }
 
 /* Контейнер для описания видео карточки */
 
 .content__video-card-description-container {
+  /*в отступах не будет необходимости. Убрал отступы*/
   width: 200px;
-  margin: 4px 0 0 2px;
   flex-grow: 1;
 }
 
@@ -316,10 +319,13 @@ ol {
 /* Ссылка для карточки контента */
 
 .content__card-link {
+  /*нужно добавить внешние отступы по 2px по всем осям , что бы при фокусе outline был виден по всем осям. Исправил*/
+  /*Высоту блока не следует ограничивать, так как при добавлении/удалении контента отображение сломается. Исправил*/
   display: block;
-  min-height: 107px;
   text-decoration: none;
   transition: background-color 0.3s;
+  margin: 2px;
+
 }
 
 /* Заголовок видео карточки */
@@ -367,7 +373,7 @@ ol {
 /* Кнопка "Показать еще" */
 
 .more-button {
-  width: 399px;
+  width: 398px;
   height: 34px;
 }
 
@@ -397,7 +403,7 @@ ol {
 /* Добавляем общий стиль для активной карточки */
 
 .content__card-link_current {
-  height: 107px;
+  /*Высоту блока не следует ограничивать, так как при добавлении/удалении контента отображение сломается. Исправил*/
   background-color: #545050;
 }
 
